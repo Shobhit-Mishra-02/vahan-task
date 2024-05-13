@@ -1,36 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
+import CustomeRoot from "./components/RootComponent.tsx";
 import "./index.css";
-import Navbar from "./components/Navbar.tsx";
-import { ArrowRightFromLine } from "lucide-react";
 
-const CustomeRoot = () => {
-  const [isOpen, setOpen] = useState(false);
-
-  const toggle = () => {
-    setOpen(!isOpen);
-  };
-
-  return (
-    <div className="flex">
-      <Navbar toggle={toggle} isOpen={isOpen} />
-      <div className="grow">
-        <span
-          onClick={toggle}
-          className="text-gray-600 lg:hidden hover:text-gray-700 cursor-pointer"
-        >
-          {" "}
-          <ArrowRightFromLine />
-        </span>
-        <App />
-      </div>
-    </div>
-  );
-};
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <CustomeRoot />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/custom",
+        element: <div>Custom</div>,
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <CustomeRoot />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
