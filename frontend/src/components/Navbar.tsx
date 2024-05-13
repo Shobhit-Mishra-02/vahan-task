@@ -22,7 +22,7 @@ function RelationLabel({ name }: { name: string }) {
 
 function Navbar({ toggle, isOpen }: { toggle: () => void; isOpen: boolean }) {
   return (
-    <div>
+    <div className="z-20">
       <nav
         className={`fixed top-0 ${
           isOpen ? "left-0" : "-left-full"

@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  LoaderFunctionArgs,
+  RouterProvider,
+} from "react-router-dom";
 import App from "./App.tsx";
 import CustomeRoot from "./components/RootComponent.tsx";
 import "./index.css";
+import TableDisplay from "./components/TableDisplay.tsx";
+import RelationCreation from "./components/RelationCreation.tsx";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +21,12 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/custom",
-        element: <div>Custom</div>,
+        path: "/table/:id",
+        element: <TableDisplay />,
+      },
+      {
+        path: "/relationCreation",
+        element: <RelationCreation />,
       },
     ],
   },

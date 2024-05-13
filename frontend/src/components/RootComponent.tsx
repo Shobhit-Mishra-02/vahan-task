@@ -13,7 +13,7 @@ const CustomeRoot = () => {
   return (
     <div className="flex">
       <Navbar toggle={toggle} isOpen={isOpen} />
-      <div className="grow">
+      <div className="grow px-2 py-4">
         <span
           onClick={toggle}
           className="text-gray-600 lg:hidden hover:text-gray-700 cursor-pointer"
@@ -21,7 +21,9 @@ const CustomeRoot = () => {
           {" "}
           <ArrowRightFromLine />
         </span>
-        <Outlet />
+        <div className="px-2 lg:px-6">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
