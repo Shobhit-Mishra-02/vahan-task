@@ -1,9 +1,90 @@
+import { useState } from "react";
+import PopupContainer from "./PopupContainer";
+
 function RelationCreation() {
+  const [isOpen, setOpen] = useState(false);
+
+  const toggle = () => {
+    setOpen(!isOpen);
+  };
+
   return (
     <div>
+      <PopupContainer isOpen={isOpen} toggle={toggle}>
+        <div className="text-2xl pb-4">Add Field</div>
+        <form>
+          <label className="text-sm font-semibold text-gray-700" htmlFor="name">
+            Name
+          </label>
+          <input
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2"
+            name="name"
+            type="text"
+          />
+
+          <label
+            className="text-sm font-semibold text-gray-700"
+            htmlFor="title"
+          >
+            Title
+          </label>
+          <input
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2"
+            name="title"
+            type="text"
+          />
+
+          <label className="text-sm font-semibold text-gray-700" htmlFor="type">
+            Type
+          </label>
+          <select
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2 bg-white"
+            name="type"
+            id="type"
+          >
+            <option value="varchar">varchar</option>
+            <option value="numeric">numeric</option>
+            <option value="timestamp">timestamp</option>
+            <option value="date">date</option>
+            <option value="time">time</option>
+            <option value="text">text</option>
+          </select>
+
+          <label htmlFor="description">Description</label>
+          <textarea
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2 bg-white"
+            name="description"
+            id="description"
+            rows={3}
+          ></textarea>
+
+          <label htmlFor="timestamp">Timestamp</label>
+          <input
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2 bg-white"
+            type="datetime-local"
+          />
+
+          <label htmlFor="time">Time</label>
+          <input
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2 bg-white"
+            type="time"
+          />
+
+          <label htmlFor="date">Date</label>
+          <input
+            className="w-full p-1 text-xl text-gray-800 border rounded-sm focus:outline-black mb-2 bg-white"
+            type="date"
+          />
+
+          <div className="pt-4">
+            <button className="primaryBtn">Submit</button>
+          </div>
+        </form>
+      </PopupContainer>
+
       <div className="py-6">
         <input
-          className="w-full p-2 text-2xl rounded-sm focus:outline-none"
+          className="w-full py-2 text-3xl rounded-sm focus:outline-none"
           type="text"
           placeholder="Relation name"
         />
@@ -11,7 +92,10 @@ function RelationCreation() {
 
       <div className="flex justify-between align-middle pt-6">
         <span className="text-2xl text-gray-700">Fields</span>
-        <button className="px-6 py-3 rounded-md bg-black text-white font-semibold">
+        <button
+          onClick={toggle}
+          className="px-6 py-3 rounded-md bg-black text-white font-semibold"
+        >
           Add
         </button>
       </div>

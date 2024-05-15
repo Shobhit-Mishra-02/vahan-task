@@ -24,6 +24,7 @@ function TableDisplay() {
                   Price
                 </th>
                 <th scope="col" className="px-6 py-3"></th>
+                <th scope="col" className="px-6 py-3"></th>
               </tr>
             </thead>
             <tbody>
@@ -34,13 +35,8 @@ function TableDisplay() {
                 <td className="px-6 py-4 text-blue-500 underline font-semibold cursor-pointer hover:to-blue-600">
                   Edit
                 </td>
-              </tr>
-              <tr className="bg-white border-b">
-                <td className="px-6 py-4">Silver</td>
-                <td className="px-6 py-4">Laptop</td>
-                <td className="px-6 py-4">$2999</td>
-                <td className="px-6 py-4 text-blue-500 underline font-semibold cursor-pointer hover:to-blue-600">
-                  Edit
+                <td className="px-6 py-4 text-red-500 underline font-semibold cursor-pointer hover:to-red-600">
+                  Remove
                 </td>
               </tr>
               <tr className="bg-white border-b">
@@ -50,6 +46,9 @@ function TableDisplay() {
                 <td className="px-6 py-4 text-blue-500 underline font-semibold cursor-pointer hover:to-blue-600">
                   Edit
                 </td>
+                <td className="px-6 py-4 text-red-500 underline font-semibold cursor-pointer hover:to-red-600">
+                  Remove
+                </td>
               </tr>
               <tr className="bg-white border-b">
                 <td className="px-6 py-4">Silver</td>
@@ -57,6 +56,20 @@ function TableDisplay() {
                 <td className="px-6 py-4">$2999</td>
                 <td className="px-6 py-4 text-blue-500 underline font-semibold cursor-pointer hover:to-blue-600">
                   Edit
+                </td>
+                <td className="px-6 py-4 text-red-500 underline font-semibold cursor-pointer hover:to-red-600">
+                  Remove
+                </td>
+              </tr>
+              <tr className="bg-white border-b">
+                <td className="px-6 py-4">Silver</td>
+                <td className="px-6 py-4">Laptop</td>
+                <td className="px-6 py-4">$2999</td>
+                <td className="px-6 py-4 text-blue-500 underline font-semibold cursor-pointer hover:to-blue-600">
+                  Edit
+                </td>
+                <td className="px-6 py-4 text-red-500 underline font-semibold cursor-pointer hover:to-red-600">
+                  Remove
                 </td>
               </tr>
             </tbody>

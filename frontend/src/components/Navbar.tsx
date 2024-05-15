@@ -1,14 +1,17 @@
 import { ArrowLeftFromLine, Plus, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function RelationLabel({ name }: { name: string }) {
   return (
     <li className="flex justify-between">
-      <span
-        className="text-gray-600 hover:text-gray-700 cursor-pointer
-               "
-      >
-        {name}
-      </span>{" "}
+      <Link to={"/relation/1"}>
+        <span
+          className="text-gray-600 hover:text-gray-700 cursor-pointer
+        "
+        >
+          {name}
+        </span>{" "}
+      </Link>
       <span
         className="
                 text-gray-600 hover:text-gray-700 cursor-pointer
@@ -26,11 +29,11 @@ function Navbar({ toggle, isOpen }: { toggle: () => void; isOpen: boolean }) {
       <nav
         className={`fixed top-0 ${
           isOpen ? "left-0" : "-left-full"
-        } bottom-0 lg:sticky lg:h-[100vh]  divide-y p-2 w-[300px] border bg-gray-100`}
+        } bottom-0 lg:sticky lg:h-[100vh]  divide-y p-2 w-[300px] border bg-gray-50 transition-all duration-700 ease`}
       >
         <div className="flex justify-between align-middle py-8">
           <span className="text-2xl font-semibold text-gray-800">
-            Simple CMS
+            <Link to={"/"}>Simple CMS</Link>
           </span>
           <span
             onClick={toggle}
@@ -43,7 +46,9 @@ function Navbar({ toggle, isOpen }: { toggle: () => void; isOpen: boolean }) {
           <div className="flex justify-between py-6 ">
             <span className="text-gray-600 font-semibold">Relations</span>
             <span className="text-gray-600 hover:text-gray-700 cursor-pointer">
-              <Plus size={28} strokeWidth={2} />
+              <Link to={"/relationCreation"}>
+                <Plus size={28} strokeWidth={2} />
+              </Link>
             </span>
           </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
-  LoaderFunctionArgs,
+  // LoaderFunctionArgs,
   RouterProvider,
 } from "react-router-dom";
 import App from "./App.tsx";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/table/:id",
+        path: "/relation/:id",
         element: <TableDisplay />,
       },
       {
