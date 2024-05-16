@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PopupContainer from "./PopupContainer";
 
 interface fieldInterface {
@@ -15,9 +15,68 @@ interface fieldInterface {
   isPrimary: boolean;
 }
 
+function FieldCreationForm({
+  isOpen,
+  toggle,
+  handleFormSubmit,
+}: {
+  isOpen: boolean;
+  toggle: () => void;
+  handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}) {
+  return (
+    <>
+      <PopupContainer isOpen={isOpen} toggle={toggle}>
+        <div className="text-2xl pb-4">Add Field</div>
+        <form onSubmit={(e) => handleFormSubmit(e)}>
+          <label className="label" htmlFor="name">
+            Name
+          </label>
+          <input className="input" name="name" type="text" required />
+
+          <label className="label" htmlFor="title">
+            Title
+          </label>
+          <input className="input" name="title" type="text" required />
+
+          <label className="label" htmlFor="type">
+            Type
+          </label>
+          <select className="input" name="type" id="type" required>
+            <option value="">select a type</option>
+            <option value="varchar">varchar</option>
+            <option value="numeric">numeric</option>
+            <option value="timestamp">timestamp</option>
+            <option value="date">date</option>
+            <option value="time">time</option>
+            <option value="text">text</option>
+            <option value="text">boolean</option>
+          </select>
+
+          <div className="flex justify-start gap-2 pt-6">
+            <input type="checkbox" name="isPrimary" />
+            <label className="label" htmlFor="isPrimary">
+              Primary key
+            </label>
+          </div>
+
+          <div className="pt-8">
+            <button className="primaryBtn">Add</button>
+          </div>
+        </form>
+      </PopupContainer>
+    </>
+  );
+}
+
 function RelationCreation() {
   const [tableStructure, setTableStructure] = useState([] as fieldInterface[]);
   const [tableName, setTableName] = useState("");
+
+  const [isOpen, setOpen] = useState(false);
+  const toggle = () => {
+    setOpen(!isOpen);
+  };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,9 +131,6 @@ function RelationCreation() {
       return;
     }
 
-    console.log(tableName);
-    console.log(tableStructure);
-
     const response = await fetch("http://localhost:5000/addTable", {
       method: "POST",
       headers: {
@@ -83,62 +139,20 @@ function RelationCreation() {
       body: JSON.stringify({ tableName, fields: tableStructure }),
     });
 
-    const data = await response.json();
-
-    console.log(data);
+    if (response.ok) {
+      confirm("The table has been created");
+    } else {
+      alert("Something went wrong");
+    }
   };
-
-  const [isOpen, setOpen] = useState(false);
-
-  const toggle = () => {
-    setOpen(!isOpen);
-  };
-
-  useEffect(() => {
-    console.log(tableStructure);
-  }, [tableStructure]);
 
   return (
     <div>
-      <PopupContainer isOpen={isOpen} toggle={toggle}>
-        <div className="text-2xl pb-4">Add Field</div>
-        <form onSubmit={(e) => handleFormSubmit(e)}>
-          <label className="label" htmlFor="name">
-            Name
-          </label>
-          <input className="input" name="name" type="text" required />
-
-          <label className="label" htmlFor="title">
-            Title
-          </label>
-          <input className="input" name="title" type="text" required />
-
-          <label className="label" htmlFor="type">
-            Type
-          </label>
-          <select className="input" name="type" id="type" required>
-            <option value="">select a type</option>
-            <option value="varchar">varchar</option>
-            <option value="numeric">numeric</option>
-            <option value="timestamp">timestamp</option>
-            <option value="date">date</option>
-            <option value="time">time</option>
-            <option value="text">text</option>
-            <option value="text">boolean</option>
-          </select>
-
-          <div className="flex justify-start gap-2 pt-6">
-            <input type="checkbox" name="isPrimary" />
-            <label className="label" htmlFor="isPrimary">
-              Primary key
-            </label>
-          </div>
-
-          <div className="pt-8">
-            <button className="primaryBtn">Add</button>
-          </div>
-        </form>
-      </PopupContainer>
+      <FieldCreationForm
+        isOpen={isOpen}
+        toggle={toggle}
+        handleFormSubmit={handleFormSubmit}
+      />
 
       <div className="py-6">
         <input
@@ -189,9 +203,6 @@ function RelationCreation() {
                 <td className="px-6 py-4">
                   {field.isPrimary ? "Primary Key" : ""}
                 </td>
-                {/* <td className="px-6 py-4 text-blue-500 underline font-semibold cursor-pointer hover:to-blue-600">
-                  Edit
-                </td> */}
                 <td
                   id={field.name}
                   className="px-6 py-4 text-red-500 underline font-semibold cursor-pointer hover:to-red-600"
