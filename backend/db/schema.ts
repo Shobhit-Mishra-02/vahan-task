@@ -5,13 +5,14 @@ import {
   text,
   boolean,
   pgEnum,
+  integer,
 } from "drizzle-orm/pg-core";
 
 export const Tables = pgTable("tables", {
   id: serial("id").primaryKey(),
   name: text("name").notNull().unique(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
 export const fieldTypes = pgEnum("field_type", [
@@ -30,4 +31,7 @@ export const Feilds = pgTable("fields", {
   title: text("title").notNull(),
   isPrimary: boolean("is_primary").notNull().default(false),
   type: fieldTypes("type").notNull(),
+  tableId: integer("table_id")
+    .notNull()
+    .references(() => Tables.id),
 });
