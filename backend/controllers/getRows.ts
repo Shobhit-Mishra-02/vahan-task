@@ -11,7 +11,14 @@ const getRows = async (req: Request, res: Response, next: NextFunction) => {
       .rows;
 
     const tableStructure = await db
-      .select({ field: Feilds })
+      .select({
+        id: Feilds.id,
+        name: Feilds.name,
+        title: Feilds.title,
+        isPrimary: Feilds.isPrimary,
+        type: Feilds.type,
+        tableId: Feilds.tableId,
+      })
       .from(Tables)
       .leftJoin(Feilds, eq(Tables.id, Feilds.tableId))
       .where(eq(Tables.name, tableName));

@@ -1,19 +1,25 @@
-import { Request, Response } from "express";
-import { Tables, Feilds } from "../db/schema";
-import { db } from "../db/connection";
 import { sql } from "drizzle-orm";
+import { Request, Response } from "express";
+import { db } from "../db/connection";
 
 const addRow = async (req: Request, res: Response) => {
   const tableName = req.body.tableName;
-  const value = req.body.value as {};
+  const values = req.body.values as {};
 
-  let query = `insert into ${tableName} (${Object.keys(value).join(
+  console.log(values);
+
+  let query = `insert into ${tableName} (${Object.keys(values).join(
     " ,"
-  )}) values (${Object.values(value).join(" ,")});`;
+  )}) values ('${Object.values(values).join("' ,'")}');`;
+
+  console.log(query);
 
   let result = await db.execute(sql.raw(query));
 
-  return res.status(200).json(result);
+  return res.status(200).json({
+    message: query,
+    result,
+  });
 };
 
 export default addRow;

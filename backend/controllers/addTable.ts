@@ -31,6 +31,7 @@ const addTable = async (req: Request, res: Response) => {
     return `create table ${tableName} (${attributes.join(" ,")});`;
   });
 
+  console.log(query);
   await db.execute(sql.raw(query));
 
   return res.status(200).json({ query });
