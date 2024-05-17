@@ -1,19 +1,6 @@
 import { useState } from "react";
 import PopupContainer from "./PopupContainer";
-
-interface fieldInterface {
-  name: string;
-  title: string;
-  type:
-    | "numeric"
-    | "timestamp"
-    | "date"
-    | "time"
-    | "boolean"
-    | "varchar"
-    | "text";
-  isPrimary: boolean;
-}
+import { fieldInterface } from "../types";
 
 function FieldCreationForm({
   isOpen,

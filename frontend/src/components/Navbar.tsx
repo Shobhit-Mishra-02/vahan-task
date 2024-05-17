@@ -1,13 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowLeftFromLine, Plus, RotateCw, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-
-interface tableInterface {
-  id: number;
-  name: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { tableInterface } from "../types";
 
 function RelationLabel({
   name,
@@ -38,7 +32,7 @@ function RelationLabel({
 
   return (
     <li className="flex justify-between">
-      <Link to={"/relation/1"}>
+      <Link to={"/relation/" + name}>
         <span
           className="text-gray-600 hover:text-gray-700 cursor-pointer
         "

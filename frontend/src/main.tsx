@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/relation/:id",
+        path: "/relation/:name",
         element: <TableDisplay />,
       },
       {
