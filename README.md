@@ -19,7 +19,10 @@ cd backend/
 touch .env
 cat .env.example >> .env # after this you need to add database url in .env file
 
-# now start the backend server
+# now, create core tables inside the database
+npx drizzle-kit push:pg
+
+# starting the backend server
 npm run dev
 
 # then, finally start the frontend
